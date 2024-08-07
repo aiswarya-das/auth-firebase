@@ -31,7 +31,7 @@ export function Header({ session }: { session: string | null }) {
         </div>
         <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8">
           <div className="text-white mb-auto text-center">Journey to a trillion miles starts from here!!</div>
-          <div className="bg-[#123456] mb-auto border-[#0a2540] border-2 rounded-2xl p-8 shadow-md max-w-md w-full"> {/* Updated form container color and border */}
+          <div className="bg-[#123456] mb-auto border-[#0a2540] border-2 rounded-2xl p-8 shadow-md max-w-md w-full">
             <h1 className="text-white text-2xl lg:text-3xl mb-1 text-center font-bold">Sign up</h1>
             <p className="text-white mb-12 text-center">Choose a signup method</p>
             <button 
