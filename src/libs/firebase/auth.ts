@@ -1,12 +1,12 @@
-// libs/firebase/auth.ts
-
+// app/libs/firebase/auth.ts
 import {
   type User,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword, // added
+  signInWithEmailAndPassword,
   signInWithPopup,
   onAuthStateChanged as _onAuthStateChanged,
 } from 'firebase/auth';
-
 import { firebaseAuth } from './config';
 
 export function onAuthStateChanged(callback: (authUser: User | null) => void) {
@@ -33,5 +33,18 @@ export async function signOutWithGoogle() {
     await firebaseAuth.signOut();
   } catch (error) {
     console.error('Error signing out with Google', error);
+  }
+}
+
+// added email sign-up function
+export async function signUpWithEmail(email: string, password: string) {
+  try {
+    const result = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    if (!result || !result.user) {
+      throw new Error('Email sign up failed');
+    }
+    return result.user.uid;
+  } catch (error) {
+    console.error('Error signing up with email', error);
   }
 }

@@ -1,17 +1,24 @@
+// app/components/header.tsx
 'use client';
 
 import { useUserSession } from '@/hooks/use-user-session';
 import { signInWithGoogle, signOutWithGoogle } from '@/libs/firebase/auth';
 import { createSession, removeSession } from '@/actions/auth-actions';
+import { useRouter } from 'next/navigation'; // added
 
 export function Header({ session }: { session: string | null }) {
   const userSessionId = useUserSession(session);
+  const router = useRouter(); // added
 
   const handleSignIn = async () => {
     const userUid = await signInWithGoogle();
     if (userUid) {
       await createSession(userUid);
     }
+  };
+
+  const handleEmailSignUpNavigation = () => { // added
+    router.push('/email-signup'); // navigate to the email sign-up page
   };
 
   const handleSignOut = async () => {
@@ -21,7 +28,7 @@ export function Header({ session }: { session: string | null }) {
 
   if (!userSessionId) {
     return (
-      <div className="flex flex-col md:flex-row h-screen w-full bg-[#0a2540]"> {/* Ensure full screen width */}
+      <div className="flex flex-col md:flex-row h-screen w-full bg-[#0a2540]">
         <div className="md:block md:w-1/2 h-full">
           <img 
             src="https://plus.unsplash.com/premium_vector-1697729782149-e53d522cb596?q=80&w=1568&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
@@ -42,7 +49,7 @@ export function Header({ session }: { session: string | null }) {
               Sign up with Google
             </button>
             <button 
-              onClick={handleSignIn} 
+              onClick={handleEmailSignUpNavigation} // modified
               className="flex items-center justify-center w-full px-6 py-2 bg-white text-gray-700 rounded-lg shadow-md hover:bg-gray-200 transition duration-300"
             >
               <img src="https://i.pinimg.com/736x/91/28/41/912841506896fdf51b089d4922dc74c3.jpg" alt="Email Icon" className="h-6 mr-2" />
@@ -62,21 +69,8 @@ export function Header({ session }: { session: string | null }) {
       <div className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <img src="https://cdn-icons-png.flaticon.com/128/5448/5448415.png" alt="Logo" className="h-14" />
-          {/* <nav>
-             <ul className="flex space-x-6 text-gray-700">
-              <li>
-                <a href='#' className="hover:text-blue-600 transition duration-300">Menu A</a>
-              </li>
-              <li>
-                <a href='#' className="hover:text-blue-600 transition duration-300">Menu B</a>
-              </li>
-              <li>
-                <a href='#' className="hover:text-blue-600 transition duration-300">Menu C</a>
-              </li>
-            </ul> 
-          </nav> */}
         </div>
-         <button 
+        <button 
           onClick={handleSignOut} 
           className="px-4 py-2 bg-[#123456] text-sky-400/100 rounded-lg shadow-md hover:bg-[#0a2540] transition duration-300 border-2 border-[#0a2540] font-bold"
         >
