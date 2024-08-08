@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInWithEmail } from '@/libs/firebase/auth'; 
+import { signInWithEmail } from '@/libs/firebase/auth';
 import { createSession } from '@/actions/auth-actions';
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
         />
       </div>
       <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-8">
-        <div className="text-white mb-auto text-center">Welcome back! Let's get you logged in.</div>
+        <div className="text-white mb-auto text-center">Welcome back! Let&apos;s get you logged in.</div>
         <div className="bg-[#123456] mb-auto border-[#0a2540] border-2 rounded-2xl p-8 shadow-md max-w-md w-full">
           <h1 className="text-white text-2xl lg:text-3xl mb-1 text-center font-bold">Log In</h1>
           <p className="text-white mb-12 text-center">Enter your email and password to log in</p>
