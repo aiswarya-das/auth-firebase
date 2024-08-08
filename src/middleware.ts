@@ -1,7 +1,7 @@
 // middleware.ts
 
 import { type NextRequest, NextResponse } from 'next/server';
-import { HOME_ROUTE, ROOT_ROUTE, SESSION_COOKIE_NAME } from './constants';
+import { HOME_ROUTE, ROOT_ROUTE,LOGIN_ROUTE,EMAIL_ROUTE, SESSION_COOKIE_NAME } from './constants';
 
 const protectedRoutes = [HOME_ROUTE];
 
@@ -19,4 +19,19 @@ export default function middleware(request: NextRequest) {
     const absoluteURL = new URL(HOME_ROUTE, request.nextUrl.origin);
     return NextResponse.redirect(absoluteURL.toString());
   }
+
+  // Redirect to home if session is set and user tries to access login
+  if (session && request.nextUrl.pathname === LOGIN_ROUTE) {
+    const absoluteURL = new URL(HOME_ROUTE, request.nextUrl.origin);
+    return NextResponse.redirect(absoluteURL.toString());
+  }
+
+    // Redirect to home if session is set and user tries to access email signup
+
+    if (session && request.nextUrl.pathname === EMAIL_ROUTE) {
+      const absoluteURL = new URL(HOME_ROUTE, request.nextUrl.origin);
+      return NextResponse.redirect(absoluteURL.toString());
+    }
+  
+
 }
