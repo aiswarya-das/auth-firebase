@@ -1,4 +1,3 @@
-// app/components/header.tsx
 'use client';
 
 import { useUserSession } from '@/hooks/use-user-session';
@@ -8,7 +7,7 @@ import { useRouter } from 'next/navigation'; // added
 
 export function Header({ session }: { session: string | null }) {
   const userSessionId = useUserSession(session);
-  const router = useRouter(); // added
+  const router = useRouter(); 
 
   const handleSignIn = async () => {
     const userUid = await signInWithGoogle();
@@ -17,8 +16,8 @@ export function Header({ session }: { session: string | null }) {
     }
   };
 
-  const handleEmailSignUpNavigation = () => { // added
-    router.push('/email-signup'); // navigate to the email sign-up page
+  const handleEmailSignUpNavigation = () => { 
+    router.push('/email-signup');
   };
 
   const handleSignOut = async () => {
@@ -56,7 +55,7 @@ export function Header({ session }: { session: string | null }) {
               Sign up with Email
             </button>
             <p className="text-white mt-4 text-center">
-              Already a user? <a href="#" className="text-blue-500">Log in</a>
+              Already a user? <a href="/login" className="text-blue-500">Log in</a>
             </p>
           </div>
         </div>
